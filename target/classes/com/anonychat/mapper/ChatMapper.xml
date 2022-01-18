@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.anonychat.mapper.ChatMapper">
+	<select id="getChatList" resultType="com.anonychat.domain.ChatVO">
+	<![CDATA[
+		select * from chat where chatid >= #{chatId} order by chatTime
+	]]>
+	</select>
+	<insert id="insert">
+		insert into chat (chatid, chatname, chatcontent) values(chat_seq.nextval, #{chatName}, #{chatContent})
+	</insert>
+	<select id="getRecentList" resultType="com.anonychat.domain.ChatVO">
+		<![CDATA[
+			select * from chat where chatid > (select max(chatId) - 3 from chat) order by chattime
+		]]>
+	</select>
+</mapper>
