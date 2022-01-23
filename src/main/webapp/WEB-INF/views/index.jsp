@@ -27,7 +27,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div id="chat" class="panel-collapse collapse in">
-                   <div class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 500px;">
+                   <div class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 400px;">
                    		<div class="chatBox">
 	                       <!--  <div class="row">
 	                            <div class="col-lg-12">
@@ -39,7 +39,7 @@
 	                                        <h4 class="media-heading">YH0808
 	                                            <span class="small pull-right">오전 16:23</span>
 	                                        </h4>
-	                                        <p>안녕하시와리</p>
+	                                        <p>안녕하세요</p>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -86,41 +86,13 @@
 </body>
 
 <script>
-function chatInsert(){
-	chatName = document.chatForm.chatName.value;
-	chatContent = document.chatForm.chatContent.value;
-	
-	var chat = {chatName:chatName, chatContent:chatContent}
-	
-	if(chatName == "" || chatContent == ""){
-		autoClosingAlert("#dangerMessage", 2000);
-	}else{
-		$.ajax({
-			type: "post",
-			url: "/chats/new",
-			data: JSON.stringify(chat),
-			contentType : "application/json; charset=utf-8",
-			success: function(result) {
-				if(result == "success"){
-					autoClosingAlert('#successMessage', 2000);
-				} else {
-					autoClosingAlert('#warningMessage', 2000);
-				}
-			}, error: function(request,status,error){
-   				 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	$("#chatContent").val("");
-	}//else
-}
-
 function autoClosingAlert(selector, delay){
 	var alert = $(selector).alert();
 	alert.show();
 	window.setTimeout(function() {alert.hide()}, delay);
 }
-
 </script>
+
 <script>
 $(function(){
 	   //최근 3개 채팅 조회
@@ -152,7 +124,7 @@ $(function(){
 	           }//for문
 
 	           chatUL.html(str);
-	           $(".chat-widget").scrollTop(500);
+	           $(".chat-widget").scrollTop(400);
 	         
 	        });
 	     }//showRecentChat()
